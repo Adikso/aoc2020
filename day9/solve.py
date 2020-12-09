@@ -16,19 +16,21 @@ def part1():
             return number
 
 
-def part2(expected):
+def part2(invalid):
     total = 0
-    from_pos, to_pos = 0, 0
-    while from_pos != len(data) and to_pos != len(data):
-        if total > expected:
-            total -= data[from_pos]
-            from_pos += 1
-        elif total < expected:
-            total += data[to_pos]
-            to_pos += 1
-        elif to_pos - from_pos > 1:
-            part = data[from_pos:to_pos]
-            return min(part) + max(part)
+    start, end = 0, 0
+    while end < len(data):
+        if total > invalid:
+            total -= data[start]
+            start += 1
+            continue
+        elif total < invalid:
+            total += data[end]
+            end += 1
+            continue
+
+        part = data[start:end]
+        return min(part) + max(part)
 
 
 result1, exec_time = perf(part1)
