@@ -1,5 +1,6 @@
 import re
 from pathlib import Path
+from time import perf_counter
 
 import requests
 import os.path
@@ -45,3 +46,9 @@ def get_input(year, day, lines=False, numbers=False, pattern=None, pattern_types
         content = converted
 
     return content
+
+
+def perf(func, *args):
+    t1 = perf_counter()
+    result = func(*args)
+    return result, perf_counter() - t1
